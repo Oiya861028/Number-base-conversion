@@ -1,43 +1,35 @@
-import java.util.Scanner;
-public class main{
-    public static final Scanner sc = new Scanner(System.in);
-    public static void main(String[] args) {
-        //Takes in base from user and checks if it's valid
-        System.out.println("Enter your numbers base:");
-        String initialBase = sc.nextLine();
-        boolean validIniBase=validBase(initialBase); 
-        while(!validIniBase){
-            System.out.println("Invalid Base. Try again:");
-            validIniBase=validBase(initialBase);
+import java.util.Scanner
+public class numberBaseConversion {
+    public static Scanner sc = new Scanner(System.in);
+    public static void main(String[] args){
+        boolean exit = false;
+        while(!exit){
+            System.out.println("Choose your conversion:");
+            System.out.println(
+                "1. Convert Binary to Decimal\n
+                2. Convert Decimal to Binary\n
+                3. Convert Binary to Hexadecimal\n
+                4. Convert Hexadecimal to Binary\n
+                5. Convert Hexadecimal to Decimal\n
+                6. Convert Decimal to Hexadecimal\n
+                7. Exit\n
+            ")
+            int option = sc.nextInt();
+            switch(option){
+                case 1:
+                    
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                    exit = true;
+                default:
+                    System.out.println("Invalid option:");
+            }
         }
 
-        //Take in a value of the user and check if it matches the base
-        System.out.println("Enter the value you want to convert:");
-        String value = sc.nextLine();
-        boolean validValue = validValue(initialBase,value);
-        while(validValue==false){
-            System.out.println("This value does not work. Try again:");
-            value = sc.nextLine();
-            validValue = validValue(initialBase, value);
-        }
-
-        //Take in base user want to convert and checks it
-        System.out.println("What do you want to convert to?");
-        String finalBase = sc.nextLine();
-        boolean validFinalBase = validBase(finalBase);
-        while(!validFinalBase){
-            System.out.println("Invalid Base. Try again:");
-            validFinalBase=validBase(finalBase);
-        }
-        
-        //convert
-        if(initialBase.equals(finalBase)){
-            System.out.println("");
-        }
-    }
-    public static boolean validBase(String base) {
-        if(base.equals("Decimal") || base.equals("Binary")  || base.equals("Hexadecimal")) return true;
-        return false;
     }
     public static boolean validValue(String base, String value){
         if(base.equals("Decimal")){
