@@ -109,6 +109,7 @@ public class numberBaseConversion {
                     default:
                         break;
                 }
+                System.out.println();
             }
             
         }
