@@ -43,8 +43,43 @@ public class main{
             }
         }
         else {
-
+            for(int i=0;i<value.length();i++) {
+                switch (value.charAt(i)) {
+                    case '0':
+                        break;
+                    case '1':
+                        break;
+                    case '2':
+                        break;   
+                    case '3':
+                        break;   
+                    case '4':
+                        break;   
+                    case '5':
+                        break;   
+                    case '6':
+                        break;   
+                    case '7':
+                        break;
+                    case '8':
+                        break;
+                    case '9':
+                        break;
+                    case 'A':
+                        break;
+                    case 'B':
+                        break;
+                    case 'C':
+                        break;
+                    case 'D':
+                        break;
+                    case 'E':
+                        break;   
+                    default:
+                        return false;
+                }
+            }
         }
-        return false;
+        return true;   
     }
 }
