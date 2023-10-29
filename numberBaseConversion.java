@@ -1,6 +1,6 @@
 import java.util.Scanner;
 public class numberBaseConversion {
-    public static Scanner sc = new Scanner(System.in);
+    public static final Scanner sc = new Scanner(System.in);
     public static void main(String[] args){
         boolean exit = false;
         while(!exit){
@@ -62,22 +62,23 @@ public class numberBaseConversion {
                     switch(initialBase){
                         case "Decimal":
                             System.out.println(initialBase+ " can only contain 0-9. Try again:");
-                            value = sc.nextLine();
+                            value = sc.next();
+                            validValue = validValue(initialBase, value);
                             break;
                         case "Binary":
                             System.out.println(initialBase+ " can only contain 0 or 1. Try again:");
-                            value = sc.nextLine();
+                            value = sc.next();
+                            validValue = validValue(initialBase, value);
                             break;
                         case "Hexadecimal":
-                            System.out.println(initialBase+" can only contain A-E or 0-9. Try again:");
-                            value = sc.nextLine();
+                            System.out.println(initialBase+" can only contain a-f or 0-9. Try again:");
+                            value = sc.next();
+                            validValue = validValue(initialBase, value);
                             break;
                         default:
                             System.out.println("What have you inputted???");
                             break;
                     }
-                    System.out.println("This value does not fit the base " +initialBase+". Try again:");
-                    value = sc.nextLine();
                 }
                 //Convert everything to decimal
                 int decimalValue;
@@ -98,10 +99,11 @@ public class numberBaseConversion {
                         System.out.println("The hexadecimal value is: " +toBase(finalBase, decimalValue));
                         break;
                     case 4:
-                        System.out.println("The decimal value is: "+decimalValue);
+                        System.out.println("The decimal value is: "+toBase(finalBase, decimalValue));
                         break;
                     case 5:
                         System.out.println("The decimal value is: "+decimalValue);
+                        break;
                     case 6:
                         System.out.println("The hexadecimal value is: "+toBase(finalBase, decimalValue) );
                     default:
@@ -157,17 +159,17 @@ public class numberBaseConversion {
                         break;
                     case '9':
                         break;
-                    case 'A':
+                    case 'a':
                         break;
-                    case 'B':
+                    case 'b':
                         break;
-                    case 'C':
+                    case 'c':
                         break;
-                    case 'D':
+                    case 'd':
                         break;
-                    case 'E':
+                    case 'e':
                         break;   
-                    case 'F':
+                    case 'f':
                         break;
                     default:
                         return false;
