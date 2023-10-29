@@ -21,89 +21,95 @@ public class numberBaseConversion {
             }
             //Assigning bases
             String initialBase="";
-            int finalBase=10;
+            String finalBase="";
             switch(option){
                 case 1:
                     initialBase = "Binary";
-                    finalBase = 10;
+                    finalBase = "Decimal";
                     break;
                 case 2:
                     initialBase = "Decimal";
-                    finalBase = 2;
+                    finalBase = "Binary";
                     break;
                 case 3:
                     initialBase = "Binary";
-                    finalBase = 16;
+                    finalBase = "Hexadecimal";
                     break;
                 case 4:
                     initialBase = "Hexadecimal";
-                    finalBase = 2;
+                    finalBase = "Binary";
                     break;
                 case 5:
                     initialBase = "Hexadecimal";
-                    finalBase = 10;
+                    finalBase = "Decimal";
                     break;
                 case 6:
                     initialBase = "Decimal";
-                    finalBase = 16;
+                    finalBase = "Hexadecimal";
                     break;
                 default:
                     exit = true;
                     break;
             }
-            //Taking input value and testing them
-            System.out.println("What value would you like to convert:");
-            String value = sc.next();
-            boolean validValue = validValue(initialBase, value);
-            while(!validValue){
-                switch(initialBase){
-                    case "Decimal":
-                        System.out.println(initialBase+ " can only contain 0-9. Try again:");
-                        value = sc.nextLine();
+        
+            if(option!=7){
+                //Taking input value 
+                System.out.println("What value would you like to convert:");
+                String value = sc.next();
+                boolean validValue = validValue(initialBase, value);
+                //Checking for validity of value
+                while(!validValue){
+                    switch(initialBase){
+                        case "Decimal":
+                            System.out.println(initialBase+ " can only contain 0-9. Try again:");
+                            value = sc.nextLine();
+                            break;
+                        case "Binary":
+                            System.out.println(initialBase+ " can only contain 0 or 1. Try again:");
+                            value = sc.nextLine();
+                            break;
+                        case "Hexadecimal":
+                            System.out.println(initialBase+" can only contain A-E or 0-9. Try again:");
+                            value = sc.nextLine();
+                            break;
+                        default:
+                            System.out.println("What have you inputted???");
+                            break;
+                    }
+                    System.out.println("This value does not fit the base " +initialBase+". Try again:");
+                    value = sc.nextLine();
+                }
+                //Convert everything to decimal
+                int decimalValue;
+                if(initialBase.equals("Binary") || initialBase.equals("Hexadecimal")){
+                    decimalValue = toDecimal(value, initialBase);
+                } else { //convert decimal string into decimal int
+                    decimalValue = Integer.parseInt(value);
+                }
+                //Final conversion and print out answers
+                switch (option) {
+                    case 1:
+                        System.out.println("The decimal value is: "+decimalValue);
                         break;
-                    case "Binary":
-                        System.out.println(initialBase+ " can only contain 0 or 1. Try again:");
-                        value = sc.nextLine();
+                    case 2:
+                        System.out.println("The binary value is: "+ toBase(finalBase,decimalValue));
                         break;
-                    case "Hexadecimal":
-                        System.out.println(initialBase+" can only contain A-E or 0-9. Try again:");
-                        value = sc.nextLine();
+                    case 3:
+                        System.out.println("The hexadecimal value is: " +toBase(finalBase, decimalValue));
                         break;
+                    case 4:
+                        System.out.println("The decimal value is: "+decimalValue);
+                        break;
+                    case 5:
+                        System.out.println("The decimal value is: "+decimalValue);
+                    case 6:
+                        System.out.println("The hexadecimal value is: "+toBase(finalBase, decimalValue) );
                     default:
-                        System.out.println("What have you inputted???");
                         break;
                 }
-                System.out.println("This value does not fit the base " +initialBase+". Try again:");
-                value = sc.nextLine();
             }
-            //Convert everything to decimal
-            int decimalValue;
-            if(initialBase.equals("Binary") || initialBase.equals("Hexadecimal")){
-                decimalValue = toDecimal(value, initialBase);
-            } else { //convert decimal string into decimal int
-                decimalValue = Integer.parseInt(value);
-            }
-            //Final conversion and print out answers
-            switch (options) {
-                case 1:
-                    System.out.println("The decimal value is: "+decimalValue);
-                    break;
-                case 2:
-
-                case 3:
-                case 4:
-                    System.out.println("The decimal value is: "+decimalValue);
-                    break;
-                case 5:
-                case 6:
-
-                default:
-                    break;
-            }
-            System.out.println(decimalValue);
-            System.out.println("Finished");
+            
         }
-
     }
     
     public static boolean validValue(String base, String value){
@@ -161,28 +167,30 @@ public class numberBaseConversion {
                         break;
                     case 'E':
                         break;   
+                    case 'F':
+                        break;
                     default:
                         return false;
                 }
             }
             return true;
-        }
-         
+        }    
     }
     
     public static int toDecimal(String value, String base){
+        int sum = 0;
         if(base.equals("Binary")){
-            int sum = 0;
-            for(int i=1;i<=value.length();i++){
-                sum += Integer.parseInt(value.substring(value.length()-i,value.length()-i+1)) * Math.pow(2, i-1);
-            }
-            return sum;
+            return Integer.parseInt(value, 2);
+        } else{
+            return Integer.parseInt(value, 16);   
         }
-        return 0;
+        
     }
-    public static String toBase(String base, int decimalValue){
-        if()
-        return null;
+    public static String toBase(String resultBase, int num){
+        if(resultBase.equals("Binary")) return Integer.toBinaryString(num);
+        else{
+            return Integer.toHexString(num);
+        }        
     }
     
     
