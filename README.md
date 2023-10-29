@@ -1,2 +1,4 @@
 # Number-base-conversion
-This program takes in a value and it's specified base from the user and converts the value into the desired base
+-Takes in Value from user using Scanner
+-Take in initial base for the value
+-Run method that converts the value into another value with the desired base
