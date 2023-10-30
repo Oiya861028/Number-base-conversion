@@ -56,6 +56,7 @@ public class numberBaseConversion {
                 //Taking input value 
                 System.out.println("What value would you like to convert:");
                 String value = sc.next();
+                value = value.toLowerCase();
                 boolean validValue = validValue(initialBase, value);
                 //Checking for validity of value
                 while(!validValue){
@@ -89,23 +90,15 @@ public class numberBaseConversion {
                 }
                 //Final conversion and print out answers
                 switch (option) {
-                    case 1:
+                    case 1, 5:
                         System.out.println("The decimal value is: "+decimalValue);
                         break;
-                    case 2:
+                    case 2, 4:
                         System.out.println("The binary value is: "+ toBase(finalBase,decimalValue));
                         break;
-                    case 3:
+                    case 3, 6:
                         System.out.println("The hexadecimal value is: " +toBase(finalBase, decimalValue));
                         break;
-                    case 4:
-                        System.out.println("The decimal value is: "+toBase(finalBase, decimalValue));
-                        break;
-                    case 5:
-                        System.out.println("The decimal value is: "+decimalValue);
-                        break;
-                    case 6:
-                        System.out.println("The hexadecimal value is: "+toBase(finalBase, decimalValue) );
                     default:
                         break;
                 }
@@ -118,7 +111,7 @@ public class numberBaseConversion {
     public static boolean validValue(String base, String value){
         if(base.equals("Decimal")){
             try {
-                int num = Integer.parseInt(value);
+                Integer.parseInt(value);
             } catch (Exception e) {
                 return false;
             }
@@ -127,9 +120,7 @@ public class numberBaseConversion {
         else if (base.equals("Binary")){        
             for(int i=0;i<value.length();i++) {
                 switch (value.charAt(i)) {
-                    case '0':
-                        break;
-                    case '1':
+                    case '0', '1':
                         break;
                     default:
                         return false;
@@ -140,37 +131,7 @@ public class numberBaseConversion {
         else {
             for(int i=0;i<value.length();i++) {
                 switch (value.charAt(i)) {
-                    case '0':
-                        break;
-                    case '1':
-                        break;
-                    case '2':
-                        break;   
-                    case '3':
-                        break;   
-                    case '4':
-                        break;   
-                    case '5':
-                        break;   
-                    case '6':
-                        break;   
-                    case '7':
-                        break;
-                    case '8':
-                        break;
-                    case '9':
-                        break;
-                    case 'a':
-                        break;
-                    case 'b':
-                        break;
-                    case 'c':
-                        break;
-                    case 'd':
-                        break;
-                    case 'e':
-                        break;   
-                    case 'f':
+                    case '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f':
                         break;
                     default:
                         return false;
@@ -182,18 +143,50 @@ public class numberBaseConversion {
     
     public static int toDecimal(String value, String base){
         int sum = 0;
-        if(base.equals("Binary")){
-            return Integer.parseInt(value, 2);
-        } else{
-            return Integer.parseInt(value, 16);   
+        //converts binary to decimal
+        if(base.equals("Binary")) {
+            for (int i=0;i<value.length();i++) {
+                if (value.charAt(value.length()-i-1) == '1') {
+                    sum += (int) Math.pow(2, i);
+                }
+            }
         }
-        
+        //converts hexadecimal to decimal
+        else if(base.equals("Hexadecimal")){
+            for (int i=0;i<value.length();i++) {
+                char x = value.charAt(value.length()-i-1);
+                int num = switch (x) {
+                    case 'a' -> 10;
+                    case 'b' -> 11;
+                    case 'c' -> 12;
+                    case 'd' -> 13;
+                    case 'e' -> 14;
+                    case 'f' -> 15;
+                    default -> Integer.parseInt(String.valueOf(x));
+                };
+                sum += (int) (num *Math.pow(16,i));
+            }
+        }
+        return sum;
     }
-    public static String toBase(String resultBase, int num){
-        if(resultBase.equals("Binary")) return Integer.toBinaryString(num);
+    public static String toBase(String resultBase, int num) {
+        String result ="";
+        if(resultBase.equals("Binary")) {
+            for(int quotient=num;quotient!=0;quotient/=2){
+                result += quotient%2;
+            }
+
+        }
         else{
-            return Integer.toHexString(num);
-        }        
+            for(int quotient=num;quotient!=0;quotient/=2){
+                switch(quotient%16){
+                    case 10 --> result+="a";
+                }
+            }
+        }
+        String reverseResult = "";
+        for(int i=result.length()-1;i>=0;i--) reverseResult += result.charAt(i);
+        return reverseResult;
     }
     
     
