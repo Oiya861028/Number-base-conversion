@@ -178,9 +178,15 @@ public class numberBaseConversion {
 
         }
         else{
-            for(int quotient=num;quotient!=0;quotient/=2){
+            for(int quotient=num;quotient!=0;quotient/=16){
                 switch(quotient%16){
-                    case 10 --> result+="a";
+                    case 10 -> result+="a";
+                    case 11 -> result+="b";
+                    case 12 -> result+="c";
+                    case 13 -> result+="d";
+                    case 14 -> result+="e";
+                    case 15 -> result+="f";
+                    default -> result+=quotient%16;
                 }
             }
         }
